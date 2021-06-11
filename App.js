@@ -4,47 +4,29 @@ import { StyleSheet, Text, View } from 'react-native';
 import MessagesScreen from './src/screens/MessagesScreen';
 import ChatScreen from './src/screens/ChatScreen';
 
-import {
-  NavigationContainer,
-  // DarkTheme,
-  // DrawerActions,
-} from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 const Stack = createStackNavigator();
 
 const App = () => {
-  // createHomeStack = () => (
-  //   <Stack.Navigator>
-  //     <Stack.Screen name="Feed" component={Feed} />
-  //     <Stack.Screen name="Detail" component={Detail } />
-  //   </Stack.Navigator>
-  // );
-
   return (
-    // <View style={styles.container}>
-    //   <Text>Open up App.js to start working on your app!</Text>
-    //   <StatusBar style="auto" />
-    // </View>
-
-    // <Feed />
-
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen
-          name="MessagesScreen"
+          name="Messages"
           component={MessagesScreen}
           options={{
-            title: 'My MessagesScreen',
+            // title: 'Messages',
             headerStyle: { backgroundColor: 'black' },
             headerTintColor: 'white',
           }}
         />
         <Stack.Screen
-          name="ChatScreen"
+          name="Chat"
           component={ChatScreen}
           options={{
-            title: 'Chat Screen',
+            // title: 'Chat',
             headerStyle: { backgroundColor: 'black' },
             headerTintColor: 'white',
           }}
@@ -53,14 +35,5 @@ const App = () => {
     </NavigationContainer>
   );
 };
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: '#fff',
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//   },
-// });
 
 export default App;
