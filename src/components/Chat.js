@@ -23,26 +23,26 @@ const Chat = ({
     subscribeToNewRoomMessages();
   }, []);
 
-  const [messages, setMessages] = useState([]);
+  // const [messages, setMessages] = useState([]);
 
-  useEffect(() => {
-    const serverMessages = [];
+  // useEffect(() => {
+  //   const serverMessages = [];
 
-    data.room.messages.forEach(({ id, body, insertedAt, user }) => {
-      serverMessages.push({
-        _id: id,
-        text: body,
-        createdAt: Date.parse(insertedAt),
-        user: {
-          _id: user.id,
-          name: user.firstName,
-          avatar: user.profilePic,
-        },
-      });
-    });
+  //   data.room.messages.forEach(({ id, body, insertedAt, user }) => {
+  //     serverMessages.push({
+  //       _id: id,
+  //       text: body,
+  //       createdAt: Date.parse(insertedAt),
+  //       user: {
+  //         _id: user.id,
+  //         name: user.firstName,
+  //         avatar: user.profilePic,
+  //       },
+  //     });
+  //   });
 
-    setMessages(serverMessages);
-  }, []);
+  //   setMessages(serverMessages);
+  // }, []);
 
   // const onSend = useCallback((messages = []) => {
   //   console.log(messages);
@@ -90,7 +90,18 @@ const Chat = ({
 
   return (
     <GiftedChat
-      messages={messages}
+      messages={data.room.messages.map(({ id, body, insertedAt, user }) => {
+        return {
+          _id: id,
+          text: body,
+          createdAt: Date.parse(insertedAt),
+          user: {
+            _id: user.id,
+            name: user.firstName,
+            avatar: user.profilePic,
+          },
+        };
+      })}
       onSend={(messages) => onSend(messages)}
       user={{
         _id: currentUserQuery.data.user.id,

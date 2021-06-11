@@ -17,7 +17,6 @@ export const Container = styled.View`
   flex: 1;
   align-items: center;
   background-color: #ffffff;
-  width: 100%;
 
   ${Platform.select({
     ios: css`
@@ -57,7 +56,7 @@ export const TextSection = styled.View`
   padding: 15px;
   padding-left: 0;
   margin-left: 10px;
-  width: 300px;
+  width: 250px;
   border-bottom-width: 1px;
   border-bottom-color: #cccccc;
 `;
