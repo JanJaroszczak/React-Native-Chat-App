@@ -16,20 +16,28 @@ const App = () => {
         <Stack.Screen
           name="Messages"
           component={MessagesScreen}
-          options={{
-            // title: 'Messages',
-            headerStyle: { backgroundColor: 'black' },
-            headerTintColor: 'white',
-          }}
+          options={
+            {
+              // title: 'Messages',
+              // headerStyle: { backgroundColor: 'black' },
+              // headerTintColor: 'white',
+            }
+          }
         />
         <Stack.Screen
           name="Chat"
           component={ChatScreen}
-          options={{
-            // title: 'Chat',
-            headerStyle: { backgroundColor: 'black' },
-            headerTintColor: 'white',
-          }}
+          // options={
+          //   {
+          //     title: 'Chat',
+          //     headerStyle: { backgroundColor: 'black' },
+          //     headerTintColor: 'white',
+          //   }
+          // }
+          options={({ route }) => ({
+            title: route.params.userName,
+            headerBackTitleVisible: false,
+          })}
         />
       </Stack.Navigator>
     </NavigationContainer>
