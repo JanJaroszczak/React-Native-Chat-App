@@ -1,12 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-import {
-  useNavigation,
-  useRoute,
-  useFocusEffect,
-  useNavigationState,
-  useIsFocused,
-} from '@react-navigation/native';
+import { useRoute } from '@react-navigation/native';
 
 import { useQuery, useMutation, gql } from '@apollo/client';
 
@@ -89,7 +83,6 @@ const ChatScreen = () => {
   const [sendMessage] = useMutation(SEND_MESSAGE);
 
   const executeMutation = (messages) => {
-    // console.log(messages);
     if (messages[0].text.length > 0) {
       sendMessage({
         variables: {
@@ -104,7 +97,7 @@ const ChatScreen = () => {
 
   // console.log(currentUserQuery.data);
 
-  console.log(roomMessagesQueryResult.data);
+  // console.log(roomMessagesQueryResult.data);
 
   return (
     <>

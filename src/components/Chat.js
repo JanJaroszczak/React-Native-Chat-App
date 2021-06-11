@@ -1,17 +1,8 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { Text, View, Button, StyleSheet } from 'react-native';
-import {
-  useNavigation,
-  useRoute,
-  useFocusEffect,
-  useNavigationState,
-  useIsFocused,
-} from '@react-navigation/native';
+import React, { useEffect } from 'react';
+import { View } from 'react-native';
 import { Bubble, GiftedChat, Send } from 'react-native-gifted-chat';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-
-import { useQuery, useMutation, gql } from '@apollo/client';
 
 const Chat = ({
   subscribeToNewRoomMessages,
@@ -22,34 +13,6 @@ const Chat = ({
   useEffect(() => {
     subscribeToNewRoomMessages();
   }, []);
-
-  // const [messages, setMessages] = useState([]);
-
-  // useEffect(() => {
-  //   const serverMessages = [];
-
-  //   data.room.messages.forEach(({ id, body, insertedAt, user }) => {
-  //     serverMessages.push({
-  //       _id: id,
-  //       text: body,
-  //       createdAt: Date.parse(insertedAt),
-  //       user: {
-  //         _id: user.id,
-  //         name: user.firstName,
-  //         avatar: user.profilePic,
-  //       },
-  //     });
-  //   });
-
-  //   setMessages(serverMessages);
-  // }, []);
-
-  // const onSend = useCallback((messages = []) => {
-  //   console.log(messages);
-  //   setMessages((previousMessages) =>
-  //     GiftedChat.append(previousMessages, messages)
-  //   );
-  // }, []);
 
   const renderSend = (props) => {
     return (
@@ -90,18 +53,21 @@ const Chat = ({
 
   return (
     <GiftedChat
-      messages={data.room.messages.map(({ id, body, insertedAt, user }) => {
-        return {
-          _id: id,
-          text: body,
-          createdAt: Date.parse(insertedAt),
-          user: {
-            _id: user.id,
-            name: user.firstName,
-            avatar: user.profilePic,
-          },
-        };
-      })}
+      messages={data.room.messages
+        .slice(0)
+        .reverse()
+        .map(({ id, body, insertedAt, user }) => {
+          return {
+            _id: id,
+            text: body,
+            createdAt: Date.parse(insertedAt),
+            user: {
+              _id: user.id,
+              name: user.firstName,
+              avatar: user.profilePic,
+            },
+          };
+        })}
       onSend={(messages) => onSend(messages)}
       user={{
         _id: currentUserQuery.data.user.id,
