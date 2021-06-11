@@ -35,7 +35,7 @@ const RoomsScreen = () => {
 
   const roomsQueryResult = useQuery(GET_ROOMS);
 
-  console.log(roomsQueryResult.data);
+  // console.log(roomsQueryResult.data);
 
   return (
     <Container>

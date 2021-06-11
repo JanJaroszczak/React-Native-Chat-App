@@ -84,7 +84,7 @@ const Room = ({
     subscribeToNewRoomMessages();
   }, []);
 
-  console.log(roomMessagesQueryResult.data);
+  // console.log(roomMessagesQueryResult.data);
 
   return (
     <>

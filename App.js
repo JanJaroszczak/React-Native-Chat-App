@@ -28,7 +28,7 @@ const authLink = setContext((_, { headers }) => {
   return {
     headers: {
       ...headers,
-      authorization: `Bearer ${process.env.TWG_CHAT_TOKEN}`,
+      authorization: 'Bearer ',
     },
   };
 });
@@ -41,7 +41,7 @@ const phoenixSocket = new PhoenixSocket(
     params: () => {
       if (1) {
         return {
-          token: process.env.TWG_CHAT_TOKEN,
+          token: '',
         };
       } else {
         return {};
