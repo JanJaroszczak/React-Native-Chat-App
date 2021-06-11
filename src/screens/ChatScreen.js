@@ -10,34 +10,173 @@ import {
 import { Bubble, GiftedChat, Send } from 'react-native-gifted-chat';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import { useQuery, useMutation, gql } from '@apollo/client';
+
+const GET_CURRENT_USER = gql`
+  query {
+    user {
+      id
+    }
+  }
+`;
+
+const GET_ROOM_MESSAGES = gql`
+  query ($id: String!) {
+    room(id: $id) {
+      messages {
+        body
+        id
+        insertedAt
+        user {
+          firstName
+          id
+          profilePic
+        }
+      }
+    }
+  }
+`;
+
+const SUBSCRIBE_ROOM_MESSAGES = gql`
+  subscription ($roomId: String!) {
+    messageAdded(roomId: $roomId) {
+      body
+      id
+      insertedAt
+      user {
+        email
+        firstName
+        id
+        lastName
+        profilePic
+        role
+      }
+    }
+  }
+`;
+
+const SEND_MESSAGE = gql`
+  mutation ($roomId: String!, $body: String!) {
+    sendMessage(roomId: $roomId, body: $body) {
+      body
+      id
+      insertedAt
+      user {
+        email
+        firstName
+        id
+        lastName
+        profilePic
+        role
+      }
+    }
+  }
+`;
 
 const ChatScreen = () => {
+  const route = useRoute();
+
+  let chosenRoom = route.params.chosenRoom;
+
+  const { subscribeToMore, ...roomMessagesQueryResult } = useQuery(
+    GET_ROOM_MESSAGES,
+    {
+      variables: { id: chosenRoom },
+    }
+  );
+
+  const currentUserQuery = useQuery(GET_CURRENT_USER);
+
+  console.log(currentUserQuery.data);
+
+  const [messageToSend, setMessageToSend] = useState({
+    roomId: chosenRoom,
+    body: '',
+  });
+  const [sendMessage] = useMutation(SEND_MESSAGE);
+
+  const onSend = () => {
+    if (messageToSend.body.length > 0) {
+      sendMessage({
+        variables: messageToSend,
+      });
+    }
+    setMessageToSend({
+      ...messageToSend,
+      body: '',
+    });
+  };
+
+  console.log(roomMessagesQueryResult.data);
+
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
-    setMessages([
-      {
-        _id: 1,
-        text: 'Hello developer',
-        createdAt: new Date(),
-        user: {
-          _id: 2,
-          name: 'React Native',
-          avatar: 'https://placeimg.com/140/140/any',
-        },
+    const serverMessages = [];
+
+    if (roomMessagesQueryResult.data) {
+      roomMessagesQueryResult.data.room.messages.forEach(
+        ({ id, body, insertedAt, user }) => {
+          serverMessages.push({
+            _id: id,
+            text: body,
+            createdAt: Date.parse(insertedAt),
+            user: {
+              _id: user.id,
+              name: firstName,
+              avatar: profilePic,
+            },
+          });
+        }
+      );
+      setMessages(serverMessages);
+    }
+  }, [roomMessagesQueryResult]);
+
+  const subscribeToNewRoomMessages = () => {
+    subscribeToMore({
+      document: SUBSCRIBE_ROOM_MESSAGES,
+      variables: { roomId: chosenRoom },
+      updateQuery: (prev, { subscriptionData }) => {
+        if (!subscriptionData.data) return prev;
+        const newFeedItem = subscriptionData.data.messageAdded;
+        return Object.assign({}, prev, {
+          room: {
+            messages: [...prev.room.messages, newFeedItem],
+          },
+        });
       },
-      {
-        _id: 2,
-        text: 'Hello world',
-        createdAt: new Date(),
-        user: {
-          _id: 1,
-          name: 'React Native',
-          avatar: 'https://placeimg.com/140/140/any',
-        },
-      },
-    ]);
+    });
+  };
+
+  useEffect(() => {
+    subscribeToNewRoomMessages();
   }, []);
+
+  // useEffect(() => {
+  //   setMessages([
+  //     {
+  //       _id: 1,
+  //       text: 'Hello developer',
+  //       createdAt: new Date(),
+  //       user: {
+  //         _id: 2,
+  //         name: 'React Native',
+  //         avatar: 'https://placeimg.com/140/140/any',
+  //       },
+  //     },
+  //     {
+  //       _id: 2,
+  //       text: 'Hello world',
+  //       createdAt: new Date(),
+  //       user: {
+  //         _id: 1,
+  //         name: 'React Native',
+  //         avatar: 'https://placeimg.com/140/140/any',
+  //       },
+  //     },
+  //   ]);
+  // }, []);
 
   const onSend = useCallback((messages = []) => {
     setMessages((previousMessages) =>
@@ -86,8 +225,9 @@ const ChatScreen = () => {
     <GiftedChat
       messages={messages}
       onSend={(messages) => onSend(messages)}
+      onSend={onSend}
       user={{
-        _id: 1,
+        _id: currentUserQuery.data.user.id,
       }}
       renderBubble={renderBubble}
       renderSend={renderSend}

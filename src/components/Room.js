@@ -100,7 +100,7 @@ const Room = ({
 
       {roomMessagesQueryResult.data && (
         // <Card onPress={() => navigation.navigate('Chat', { chosenRoom: id })}>
-        <Card onPress={() => {}}>
+        <Card onPress={() => navigation.navigate('Chat', { chosenRoom: id })}>
           <UserInfo>
             <UserImgWrapper>
               <UserImg
