@@ -1,8 +1,8 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import Feed from './src/Feed';
-import Detail from './src/Detail';
+import MessagesScreen from './src/screens/MessagesScreen';
+import ChatScreen from './src/screens/ChatScreen';
 
 import {
   NavigationContainer,
@@ -13,7 +13,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 const Stack = createStackNavigator();
 
-export default function App() {
+const App = () => {
   // createHomeStack = () => (
   //   <Stack.Navigator>
   //     <Stack.Screen name="Feed" component={Feed} />
@@ -32,19 +32,19 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen
-          name="Feed"
-          component={Feed}
+          name="MessagesScreen"
+          component={MessagesScreen}
           options={{
-            title: 'My Feed',
+            title: 'My MessagesScreen',
             headerStyle: { backgroundColor: 'black' },
             headerTintColor: 'white',
           }}
         />
         <Stack.Screen
-          name="Detail"
-          component={Detail}
+          name="ChatScreen"
+          component={ChatScreen}
           options={{
-            title: 'Details Screen',
+            title: 'Chat Screen',
             headerStyle: { backgroundColor: 'black' },
             headerTintColor: 'white',
           }}
@@ -52,7 +52,7 @@ export default function App() {
       </Stack.Navigator>
     </NavigationContainer>
   );
-}
+};
 
 // const styles = StyleSheet.create({
 //   container: {
@@ -62,3 +62,5 @@ export default function App() {
 //     justifyContent: 'center',
 //   },
 // });
+
+export default App;
