@@ -6,7 +6,6 @@ let width = Dimensions.get('window').width;
 
 export const HeaderWrapper = styled.View`
   position: relative;
-  /* left: -56px; */
   flex-direction: row;
   background-color: #b6defd;
   width: ${width};
@@ -26,9 +25,23 @@ export const HeaderWrapper = styled.View`
   })};
 `;
 
-export const RoomPicWrapper = styled.View`
+export const ArrowTouch = styled.TouchableOpacity`
   position: absolute;
   left: 15px;
+
+  ${Platform.select({
+    ios: css`
+      top: 30px;
+    `,
+    android: css`
+      top: 50px;
+    `,
+  })};
+`;
+
+export const RoomPicWrapper = styled.View`
+  position: absolute;
+  left: 43px;
 
   ${Platform.select({
     ios: css`
@@ -43,7 +56,6 @@ export const RoomPicWrapper = styled.View`
 export const RoomName = styled.Text`
   position: absolute;
   left: 105px;
-  width: ${width * 0.4};
   font-size: 15px;
   color: #5603ad;
 
@@ -55,10 +67,6 @@ export const RoomName = styled.Text`
       bottom: 29px;
     `,
   })};
-
-  @media (max-width: 320px) {
-    width: ${width * 0.3};
-  }
 `;
 
 export const ImagesWrapper = styled.View`

@@ -137,7 +137,11 @@ const Room = ({
           // <Card onPress={() => navigation.navigate('Chat', { chosenRoom: id })}>
           <Card
             onPress={() =>
-              navigation.navigate('Chat', { chosenRoom: id, roomPic })
+              navigation.navigate('Chat', {
+                chosenRoom: id,
+                roomPic,
+                roomName: name,
+              })
             }
           >
             <PostTime style={{ fontFamily: 'Poppins_400Regular' }}>
