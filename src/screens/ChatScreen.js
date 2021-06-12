@@ -1,72 +1,15 @@
 import React from 'react';
-
 import { useRoute } from '@react-navigation/native';
-
-import { useQuery, useMutation, gql } from '@apollo/client';
+import { useQuery, useMutation } from '@apollo/client';
 
 import Chat from '../components/Chat';
 
-const GET_CURRENT_USER = gql`
-  query {
-    user {
-      id
-    }
-  }
-`;
-
-const GET_ROOM_MESSAGES = gql`
-  query ($id: String!) {
-    room(id: $id) {
-      id
-      messages {
-        body
-        id
-        insertedAt
-        user {
-          firstName
-          id
-          profilePic
-        }
-      }
-    }
-  }
-`;
-
-const SUBSCRIBE_ROOM_MESSAGES = gql`
-  subscription ($roomId: String!) {
-    messageAdded(roomId: $roomId) {
-      body
-      id
-      insertedAt
-      user {
-        email
-        firstName
-        id
-        lastName
-        profilePic
-        role
-      }
-    }
-  }
-`;
-
-const SEND_MESSAGE = gql`
-  mutation ($roomId: String!, $body: String!) {
-    sendMessage(roomId: $roomId, body: $body) {
-      body
-      id
-      insertedAt
-      user {
-        email
-        firstName
-        id
-        lastName
-        profilePic
-        role
-      }
-    }
-  }
-`;
+import {
+  GET_CURRENT_USER,
+  GET_ROOM_MESSAGES,
+  SUBSCRIBE_ROOM_MESSAGES,
+  SEND_MESSAGE,
+} from '../helpers/graphqlHelpers';
 
 const ChatScreen = () => {
   const route = useRoute();
@@ -94,10 +37,6 @@ const ChatScreen = () => {
   };
 
   const currentUserQuery = useQuery(GET_CURRENT_USER);
-
-  // console.log(currentUserQuery.data);
-
-  // console.log(roomMessagesQueryResult.data);
 
   return (
     <>

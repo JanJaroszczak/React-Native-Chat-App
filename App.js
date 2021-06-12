@@ -1,12 +1,8 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
 import RoomsScreen from './src/screens/RoomsScreen';
 import ChatScreen from './src/screens/ChatScreen';
-
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-
 import {
   ApolloClient,
   InMemoryCache,
@@ -31,7 +27,8 @@ const authLink = setContext((_, { headers }) => {
   return {
     headers: {
       ...headers,
-      authorization: `Bearer ${process.env.TWG_CHAT_TOKEN}`,
+      authorization:
+        'Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJjaGF0bHkiLCJleHAiOjE2MjQ1Mzg5NDIsImlhdCI6MTYyMjExOTc0MiwiaXNzIjoiY2hhdGx5IiwianRpIjoiYTQ0OGNiYzQtNWU5MS00ZTcxLWI5NDAtZGNkZDgyMjhiY2IxIiwibmJmIjoxNjIyMTE5NzQxLCJzdWIiOiI4YjE5YzI1YS00M2M0LTQ3OTMtOWIyYi04ZjhlOTcxN2Y2ZDkiLCJ0eXAiOiJhY2Nlc3MifQ.SPNRePK08Ol9c070KEcFHOI2cyfZM5FV22T9RTX1TthfjLWd4yYJiSTd-6LbtqlT2LI1q4s3pL-q_z870D3u1g',
     },
   };
 });
@@ -44,7 +41,8 @@ const phoenixSocket = new PhoenixSocket(
     params: () => {
       if (1) {
         return {
-          token: process.env.TWG_CHAT_TOKEN,
+          token:
+            'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJjaGF0bHkiLCJleHAiOjE2MjQ1Mzg5NDIsImlhdCI6MTYyMjExOTc0MiwiaXNzIjoiY2hhdGx5IiwianRpIjoiYTQ0OGNiYzQtNWU5MS00ZTcxLWI5NDAtZGNkZDgyMjhiY2IxIiwibmJmIjoxNjIyMTE5NzQxLCJzdWIiOiI4YjE5YzI1YS00M2M0LTQ3OTMtOWIyYi04ZjhlOTcxN2Y2ZDkiLCJ0eXAiOiJhY2Nlc3MifQ.SPNRePK08Ol9c070KEcFHOI2cyfZM5FV22T9RTX1TthfjLWd4yYJiSTd-6LbtqlT2LI1q4s3pL-q_z870D3u1g',
         };
       } else {
         return {};
@@ -78,29 +76,11 @@ const App = () => {
           <Stack.Screen
             name="Rooms"
             component={RoomsScreen}
-            // options={
-            //   {
-            //     title: 'Messages',
-            //     headerStyle: { backgroundColor: 'black' },
-            //     headerTintColor: 'white',
-            //   }
-            // }
             options={{ headerTitle: () => <RoomsHeader /> }}
           />
           <Stack.Screen
             name="Chat"
             component={ChatScreen}
-            // options={
-            //   {
-            //     title: 'Chat',
-            //     headerStyle: { backgroundColor: 'black' },
-            //     headerTintColor: 'white',
-            //   }
-            // }
-            // options={({ route }) => ({
-            //   // title: route.params.userName,
-            //   headerBackTitleVisible: false,
-            // })}
             options={{
               headerBackTitleVisible: false,
               headerTitle: () => <ChatHeader />,

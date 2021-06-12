@@ -1,5 +1,4 @@
 import React from 'react';
-
 import AppLoading from 'expo-app-loading';
 import { useFonts, Poppins_700Bold } from '@expo-google-fonts/poppins';
 
@@ -30,17 +29,3 @@ const RoomsHeader = () => {
 };
 
 export default RoomsHeader;
-
-/* const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#b6defd',
-    width: width,
-    height: '100%',
-    padding: 0,
-    marginLeft: -16,
-  },
-  line1: {
-  backgroundColor: '#b6defd',
-  width: width,
-  },
-}); */

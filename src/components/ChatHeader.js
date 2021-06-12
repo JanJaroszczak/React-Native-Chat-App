@@ -1,14 +1,9 @@
 import React from 'react';
-
 import { useRoute, useNavigation } from '@react-navigation/native';
-
 import { Dimensions } from 'react-native';
-
 import AppLoading from 'expo-app-loading';
 import { useFonts, Poppins_600SemiBold } from '@expo-google-fonts/poppins';
-
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-
 import StyleSheet from 'react-native-media-query';
 
 import {

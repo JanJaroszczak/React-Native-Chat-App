@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components';
-
 import { Dimensions } from 'react-native';
 
 let width = Dimensions.get('window').width;
@@ -7,9 +6,9 @@ let width = Dimensions.get('window').width;
 export const HeaderWrapper = styled.View`
   position: relative;
   flex-direction: row;
-  background-color: #b6defd;
   width: ${width};
   padding: 0;
+  background-color: #b6defd;
   border-bottom-left-radius: 25px;
   border-bottom-right-radius: 25px;
 
