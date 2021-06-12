@@ -6,6 +6,7 @@ let width = Dimensions.get('window').width;
 
 export const HeaderWrapper = styled.View`
   position: relative;
+  /* left: -56px; */
   flex-direction: row;
   background-color: #b6defd;
   width: ${width};
@@ -19,26 +20,45 @@ export const HeaderWrapper = styled.View`
       height: 90px;
     `,
     android: css`
-      margin-left: -16px;
+      margin-left: -72px;
       height: 114px;
     `,
   })};
 `;
 
-export const Title = styled.Text`
+export const RoomPicWrapper = styled.View`
   position: absolute;
   left: 15px;
-  font-size: 30px;
+
+  ${Platform.select({
+    ios: css`
+      bottom: 15px;
+    `,
+    android: css`
+      bottom: 20px;
+    `,
+  })};
+`;
+
+export const RoomName = styled.Text`
+  position: absolute;
+  left: 105px;
+  width: ${width * 0.4};
+  font-size: 15px;
   color: #5603ad;
 
   ${Platform.select({
     ios: css`
-      bottom: 13px;
+      bottom: 23px;
     `,
     android: css`
-      bottom: 10px;
+      bottom: 29px;
     `,
   })};
+
+  @media (max-width: 320px) {
+    width: ${width * 0.3};
+  }
 `;
 
 export const ImagesWrapper = styled.View`

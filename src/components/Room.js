@@ -135,7 +135,11 @@ const Room = ({
 
         {roomMessagesQueryResult.data && (
           // <Card onPress={() => navigation.navigate('Chat', { chosenRoom: id })}>
-          <Card onPress={() => navigation.navigate('Chat', { chosenRoom: id })}>
+          <Card
+            onPress={() =>
+              navigation.navigate('Chat', { chosenRoom: id, roomPic })
+            }
+          >
             <PostTime style={{ fontFamily: 'Poppins_400Regular' }}>
               {
                 roomMessagesQueryResult.data.room.messages[

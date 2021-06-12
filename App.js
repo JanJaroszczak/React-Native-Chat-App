@@ -21,6 +21,7 @@ import { hasSubscription } from '@jumpn/utils-graphql';
 import { setContext } from '@apollo/client/link/context';
 
 import RoomsHeader from './src/components/RoomsHeader';
+import ChatHeader from './src/components/ChatHeader';
 
 const httpLink = createHttpLink({
   uri: 'https://chat.thewidlarzgroup.com/api/graphiql',
@@ -84,7 +85,7 @@ const App = () => {
             //     headerTintColor: 'white',
             //   }
             // }
-            options={{ headerTitle: (props) => <RoomsHeader {...props} /> }}
+            options={{ headerTitle: () => <RoomsHeader /> }}
           />
           <Stack.Screen
             name="Chat"
@@ -96,10 +97,14 @@ const App = () => {
             //     headerTintColor: 'white',
             //   }
             // }
-            options={({ route }) => ({
-              // title: route.params.userName,
+            // options={({ route }) => ({
+            //   // title: route.params.userName,
+            //   headerBackTitleVisible: false,
+            // })}
+            options={{
               headerBackTitleVisible: false,
-            })}
+              headerTitle: () => <ChatHeader />,
+            }}
           />
         </Stack.Navigator>
       </NavigationContainer>
