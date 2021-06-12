@@ -1,6 +1,11 @@
 import React, { useEffect } from 'react';
-import { View } from 'react-native';
-import { Bubble, GiftedChat, Send } from 'react-native-gifted-chat';
+import { View, Image } from 'react-native';
+import {
+  Bubble,
+  GiftedChat,
+  Send,
+  InputToolbar,
+} from 'react-native-gifted-chat';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
@@ -46,12 +51,10 @@ const Chat = ({
   const renderSend = (props) => {
     return (
       <Send {...props}>
-        <View>
-          <MaterialCommunityIcons
-            name="send-circle"
-            style={{ marginBottom: 5, marginRight: 5 }}
-            size={32}
-            color="#2e64e5"
+        <View style={{ marginRight: 30, paddingBottom: 4 }}>
+          <Image
+            source={require('../assets/send.png')}
+            style={{ width: 37, height: 37 }}
           />
         </View>
       </Send>
@@ -89,6 +92,21 @@ const Chat = ({
             fontFamily: 'Poppins_400Regular',
             color: '#000',
           },
+        }}
+      />
+    );
+  };
+
+  const renderInputToolbar = (props) => {
+    //Add the extra styles via containerStyle
+    return (
+      <InputToolbar
+        {...props}
+        containerStyle={{
+          marginLeft: -15,
+          paddingLeft: 20,
+          marginRight: -15,
+          paddingLeft: 20,
         }}
       />
     );
@@ -133,6 +151,7 @@ const Chat = ({
           }}
           renderBubble={renderBubble}
           renderSend={renderSend}
+          renderInputToolbar={renderInputToolbar}
           alwaysShowSend
           scrollToBottom
           scrollToBottomComponent={scrollToBottomComponent}
