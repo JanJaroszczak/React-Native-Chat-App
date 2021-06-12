@@ -101,6 +101,11 @@ const Room = ({
       {roomMessagesQueryResult.data && (
         // <Card onPress={() => navigation.navigate('Chat', { chosenRoom: id })}>
         <Card onPress={() => navigation.navigate('Chat', { chosenRoom: id })}>
+          <PostTime>
+            {roomMessagesQueryResult.data.room.messages[
+              roomMessagesQueryResult.data.room.messages.length - 1
+            ].insertedAt.substr(11)}
+          </PostTime>
           <UserInfo>
             <UserImgWrapper>
               <UserImg
@@ -115,14 +120,9 @@ const Room = ({
             </UserImgWrapper>
             <TextSection>
               <UserInfoText>
-                <UserName>{name}</UserName>
-                <PostTime>
-                  {roomMessagesQueryResult.data.room.messages[
-                    roomMessagesQueryResult.data.room.messages.length - 1
-                  ].insertedAt.substr(11)}
-                </PostTime>
+                <UserName numberOfLines={1}>{name}</UserName>
               </UserInfoText>
-              <MessageText>
+              <MessageText numberOfLines={1}>
                 {
                   roomMessagesQueryResult.data.room.messages[
                     roomMessagesQueryResult.data.room.messages.length - 1
