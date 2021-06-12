@@ -35,19 +35,19 @@ export const PostTime = styled.Text`
   color: #c3c5cf;
 `;
 
-export const UserInfo = styled.View`
+export const CardInfo = styled.View`
   flex-direction: row;
   height: 100px;
   align-items: center;
 `;
 
-export const UserImgWrapper = styled.View`
+export const RoomImgWrapper = styled.View`
   justify-content: center;
   align-items: center;
   width: 95px;
 `;
 
-export const UserImg = styled.Image`
+export const RoomImg = styled.Image`
   width: 72px;
   height: 72px;
   border-radius: 36px;
@@ -58,13 +58,13 @@ export const TextSection = styled.View`
   width: ${width - 97};
 `;
 
-export const UserInfoText = styled.View`
+export const CardInfoText = styled.View`
   flex-direction: row;
   justify-content: space-between;
   padding: 2px 8px 2px 0;
 `;
 
-export const UserName = styled.Text`
+export const RoomName = styled.Text`
   font-size: 15px;
 `;
 

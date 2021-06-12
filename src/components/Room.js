@@ -15,11 +15,11 @@ import {
 
 import {
   Card,
-  UserInfo,
-  UserImgWrapper,
-  UserImg,
-  UserInfoText,
-  UserName,
+  CardInfo,
+  RoomImgWrapper,
+  RoomImg,
+  CardInfoText,
+  RoomName,
   PostTime,
   MessageText,
   TextSection,
@@ -82,9 +82,9 @@ const Room = ({ id, name, roomPic }) => {
                 ].insertedAt
               }
             </PostTime>
-            <UserInfo>
-              <UserImgWrapper>
-                <UserImg
+            <CardInfo>
+              <RoomImgWrapper>
+                <RoomImg
                   source={
                     roomPic
                       ? {
@@ -93,16 +93,16 @@ const Room = ({ id, name, roomPic }) => {
                       : require('../assets/profile.jpg')
                   }
                 />
-              </UserImgWrapper>
+              </RoomImgWrapper>
               <TextSection>
-                <UserInfoText>
-                  <UserName
+                <CardInfoText>
+                  <RoomName
                     numberOfLines={1}
                     style={{ fontFamily: 'Poppins_400Regular' }}
                   >
                     {name}
-                  </UserName>
-                </UserInfoText>
+                  </RoomName>
+                </CardInfoText>
                 <MessageText
                   numberOfLines={1}
                   style={{ fontFamily: 'Poppins_400Regular' }}
@@ -114,7 +114,7 @@ const Room = ({ id, name, roomPic }) => {
                   }
                 </MessageText>
               </TextSection>
-            </UserInfo>
+            </CardInfo>
           </Card>
         )}
       </>
