@@ -20,7 +20,7 @@ import { Socket as PhoenixSocket } from 'phoenix';
 import { hasSubscription } from '@jumpn/utils-graphql';
 import { setContext } from '@apollo/client/link/context';
 
-import RoomHeader from './src/components/RoomHeader';
+import RoomsHeader from './src/components/RoomsHeader';
 
 const httpLink = createHttpLink({
   uri: 'https://chat.thewidlarzgroup.com/api/graphiql',
@@ -84,7 +84,7 @@ const App = () => {
             //     headerTintColor: 'white',
             //   }
             // }
-            options={{ headerTitle: (props) => <RoomHeader {...props} /> }}
+            options={{ headerTitle: (props) => <RoomsHeader {...props} /> }}
           />
           <Stack.Screen
             name="Chat"
