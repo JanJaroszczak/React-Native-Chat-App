@@ -1,4 +1,5 @@
 import React from 'react';
+import { LogBox } from 'react-native';
 import RoomsScreen from './src/screens/RoomsScreen';
 import ChatScreen from './src/screens/ChatScreen';
 import { NavigationContainer } from '@react-navigation/native';
@@ -18,6 +19,9 @@ import { setContext } from '@apollo/client/link/context';
 
 import RoomsHeader from './src/components/RoomsHeader';
 import ChatHeader from './src/components/ChatHeader';
+
+LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
+LogBox.ignoreAllLogs(); //Ignore all log notifications
 
 const httpLink = createHttpLink({
   uri: 'https://chat.thewidlarzgroup.com/api/graphiql',
